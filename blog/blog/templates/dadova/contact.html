@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock %}
+
+
+{% block content %}
+
+    <header class="py-5 bg-light border-bottom mb-4">
+        <div class="container">
+            <div class="text-center my-5">
+                <h1 class="fw-bolder">Contact With Us</h1>
+                <p class="lead mb-0">Blog Contactpage</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+
+    <form method="POST">
+        
+        {% csrf_token %}
+
+        <input class="form-control" type="email" required="" placeholder="E-Mail"><br>
+        <input class="form-control" type="text" required="" placeholder="Name"><br>
+        <input class="form-control" type="tel" required="" placeholder="Phone Number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"><br>
+        <button class="btn btn-primary" type="submit">Send</button>
+
+    </form>
+
+    </div><br>
+
+{% endblock %}
