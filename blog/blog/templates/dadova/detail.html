@@ -27,7 +27,9 @@
                         <li class="nav-item"><a class="nav-link" href="{% url 'dadova:contact_us' %}">Contact</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'dadova:login' %}">Sign In</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'dadova:register' %}">Sign Up</a></li>
-                        <li class="nav-item"><a class="nav-link">{{ user.username }}</a></li>
+                        {% if user.id != None %}
+                            <li class="nav-item"><a class="nav-link">{{ user.username }}</a></li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
@@ -65,6 +67,7 @@
                         <div class="card bg-light">
                             <div class="card-body">
                                 <!-- Comment form-->
+                                {% if user.id != None %}
                                 <form class="mb-4" action="{% url 'dadova:leave_comment' post.id user.id %}" method="POST">
 
                                     {% csrf_token %}
@@ -73,6 +76,16 @@
                                     <button class="btn btn-primary" type="submit">Leave Commment</button>
 
                                 </form>
+                                {% else %}
+                                <form class="mb-4" action="{% url 'dadova:register' %}" method="POST">
+
+                                    {% csrf_token %}
+
+                                    <textarea class="form-control" rows="3" placeholder="Join the discussion and leave a comment!" name="text"></textarea><br>
+                                    <button class="btn btn-primary" type="submit">Leave Commment</button>
+
+                                </form>
+                                {% endif %}
                                 
                                 <!-- Comment with nested comments-->
                                 {% for comment in comments %}

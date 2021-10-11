@@ -27,7 +27,9 @@
                         <li class="nav-item"><a class="nav-link" href="{% url 'dadova:contact_us' %}">Contact</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'dadova:login' %}">Sign In</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'dadova:register' %}">Sign Up</a></li>
-                        <li class="nav-item"><a class="nav-link">{{ user.username }}</a></li>
+                        {% if user.id != None %}
+                        	<li class="nav-item"><a class="nav-link">{{ user.username }}</a></li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
@@ -57,7 +59,11 @@
                                     <div class="small text-muted">{{ post.pub_date }}</div>
                                     <h2 class="card-title">{{ post.title }}</h2>
                                     <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus possimus, veniam magni quis!</p>
+                                    {% if user.id != None %}
                                     <a class="btn btn-primary" href="{% url 'dadova:post_detail' post.id user.id %}">Read more →</a>
+                                    {% else %}
+                                    <a class="btn btn-primary" href="{% url 'dadova:register' %}">Register →</a>
+                                    {% endif %}
                                 </div>
                             </div>
                         {% endif %}
@@ -73,7 +79,11 @@
                                         <div class="small text-muted">{{ post.pub_date }}</div>
                                         <h2 class="card-title h4">{{ post.title }}</h2>
                                         <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
-                                        <a class="btn btn-primary" href="{% url 'dadova:post_detail' post.id user.id %}">Read more →</a>
+                                        {% if user.id != None %}
+                                    	<a class="btn btn-primary" href="{% url 'dadova:post_detail' post.id user.id %}">Read more →</a>
+                                    	{% else %}
+                                    	<a class="btn btn-primary" href="{% url 'dadova:register' %}">Register →</a>
+                                    	{% endif %}
                                     </div>
                                 </div>
                             {% endfor %}
